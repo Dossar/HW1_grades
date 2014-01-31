@@ -25,8 +25,8 @@ private:
     double avweight;
     char lettergrade;
 
-    double calc_ave();
-    char calc_letter();
+    void calc_ave();
+    void calc_letter();
 
 };
 	
@@ -80,8 +80,8 @@ void Student::input(){
         
     }
     
-    Student::avweight = calc_ave();
-    Student::lettergrade = calc_letter();
+    calc_ave();
+    calc_letter();
     
 }
 
@@ -98,32 +98,26 @@ void Student::output(){
 }
 
 // Calculate average weighted grade
-double Student::calc_ave(){
-    
+void Student::calc_ave(){
+
     int i;
-    double total = 0.0;
-    for ( i = 0 ; i < 4 ; i++ )
-    {
-        total += (double)( Student::qgrade[i] * (Student::qweight[i]/100.0) ); // Add up all weighted scores
+    for (i = 0; i < 4; i++) {
+        avweight += (double) (Student::qgrade[i] * (Student::qweight[i] / 100.0)); // Add up all weighted scores
     }
-    return total;
 }
 
 // Calculate final letter grade
-char Student::calc_letter(){
-    double avgrade = Student::avweight;
-    char lgrade; // For storing the letter grade to return
-    if( avgrade < 65.0 )
-        lgrade = 'F';
-    else if( avgrade >= 65.0 && avgrade < 70.0 )
-        lgrade = 'D';
-    else if( avgrade >= 70.0 && avgrade < 80.0 )
-        lgrade = 'C';
-    else if( avgrade >= 80.0 && avgrade < 90.0 )
-        lgrade = 'B';
-    else if( avgrade >= 90.0 && avgrade <= 100.0 )
-        lgrade = 'A';
-    return lgrade;
+void Student::calc_letter(){
+    if( avweight < 65.0 )
+        lettergrade = 'F';
+    else if( avweight >= 65.0 && avweight < 70.0 )
+        lettergrade = 'D';
+    else if( avweight >= 70.0 && avweight < 80.0 )
+        lettergrade = 'C';
+    else if( avweight >= 80.0 && avweight < 90.0 )
+        lettergrade = 'B';
+    else if( avweight >= 90.0 && avweight <= 100.0 )
+        lettergrade = 'A';
 }
 
 /*
